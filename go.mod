@@ -1,3 +1,3 @@
-module github.com/emersion/go-maildir
+module github.com/stunndard/go-maildir
 
 go 1.12
