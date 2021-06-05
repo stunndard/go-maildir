@@ -20,11 +20,6 @@ import (
 	"time"
 )
 
-// The separator separates a messages unique key from its flags in the filename.
-// This should only be changed on operating systems where the colon isn't
-// allowed in filenames.
-var separator rune = '['
-
 var id int64 = 10000
 
 // createMode holds the permissions used when creating a directory.
