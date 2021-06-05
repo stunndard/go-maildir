@@ -505,11 +505,8 @@ func (d *Delivery) Close() error {
 	if err != nil {
 		return err
 	}
-	err = os.Link(tmppath, filepath.Join(string(d.d), "new", d.key))
-	if err != nil {
-		return err
-	}
-	err = os.Remove(tmppath)
+	// assume tmp amd new are on the same fs
+	err = os.Rename(tmppath, filepath.Join(string(d.d), "new", d.key))
 	if err != nil {
 		return err
 	}
