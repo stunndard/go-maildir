@@ -20,11 +20,6 @@ import (
 	"time"
 )
 
-// The separator separates a messages unique key from its flags in the filename.
-// This should only be changed on operating systems where the colon isn't
-// allowed in filenames.
-var separator rune = '['
-
 var id int64 = 10000
 
 // createMode holds the permissions used when creating a directory.
@@ -505,11 +500,8 @@ func (d *Delivery) Close() error {
 	if err != nil {
 		return err
 	}
-	err = os.Link(tmppath, filepath.Join(string(d.d), "new", d.key))
-	if err != nil {
-		return err
-	}
-	err = os.Remove(tmppath)
+	// assume tmp amd new are on the same fs
+	err = os.Rename(tmppath, filepath.Join(string(d.d), "new", d.key))
 	if err != nil {
 		return err
 	}
